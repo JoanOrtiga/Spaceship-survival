@@ -36,14 +36,23 @@ namespace SpaceShipSurvival
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.tag == "wall")
+            Debug.Log(other);
+            
+            if (other.CompareTag("wall"))
             {
-                //Lesshp
-                gameObject.SetActive(false);
-                //Animation destroy
-
-                playerShooting.numberOfUsingBullets--;
+                UnuseBullet();
             }
+            else if (other.CompareTag("Character"))
+            {
+                UnuseBullet();
+                other.GetComponent<Character>().LoseHealth(50);
+            }
+        }
+
+        private void UnuseBullet()
+        {
+            gameObject.SetActive(false); 
+            playerShooting.numberOfUsingBullets--;
         }
     }
 }

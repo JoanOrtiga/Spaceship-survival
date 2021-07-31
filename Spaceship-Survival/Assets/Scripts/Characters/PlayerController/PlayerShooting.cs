@@ -9,7 +9,7 @@ namespace  SpaceShipSurvival
     public class PlayerShooting : MonoBehaviour
     {
         public GameObject bulletPrefab;
-        public GameObject bulletBox; //is where all the bullets will be kept
+        public Transform bulletBox; //is where all the bullets will be kept
 
         private GameObject activeBullet;
         private GameObject instantiatedBullet;
@@ -25,26 +25,22 @@ namespace  SpaceShipSurvival
         {
             for (int i = 0; i < initialBullets; i++)
             {
-                instantiatedBullet = Instantiate(bulletPrefab);
-
-                instantiatedBullet.SetActive(false);
-                instantiatedBullet.transform.parent = bulletBox.transform;
+                SpawnBullet();
             }
         }
-
+        
         private void Update()
         {
             betweenBulletsTimer -= Time.deltaTime;
 
             if (Input.GetMouseButton(0) && betweenBulletsTimer <= 0)
             {
-
-                if (bulletBox.transform.childCount == numberOfUsingBullets)
+                if (bulletBox.childCount == numberOfUsingBullets)
                 {
-                    Spawn();
+                    SpawnBullet();
                 }
 
-                activeBullet = bulletBox.transform.GetChild(numberOfUsingBullets).gameObject;
+                activeBullet = bulletBox.GetChild(numberOfUsingBullets).gameObject;
 
                 activeBullet.transform.position = transform.position;
                 activeBullet.transform.rotation = transform.rotation;
@@ -58,12 +54,10 @@ namespace  SpaceShipSurvival
             }
         }
 
-        private void Spawn()
+        private void SpawnBullet()
         {
-            instantiatedBullet = Instantiate(bulletPrefab);
-
+            instantiatedBullet = Instantiate(bulletPrefab, bulletBox);
             instantiatedBullet.SetActive(false);
-            instantiatedBullet.transform.parent = bulletBox.transform;
         }
     }
 }

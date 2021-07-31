@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceShipSurvival
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Character
     {
         private Rigidbody2D rigidbody2D;
         [SerializeField] private float movementSpeed = 30.0f;
