@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceShipSurvival
 {
-    public class EnemyController : Character
+    public class EnemyController : Enemy
     {
         private void Awake()
         {
