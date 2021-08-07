@@ -35,13 +35,22 @@ namespace SpaceShipSurvival
 
         public void IncreaseHealth(int health)
         {
+            if (currentHealth + health < maxHealth) 
+            {
+                int x;
+                x = (currentHealth + health) - maxHealth;
+                health -= x;
+            }
+                
             currentHealth += health;
         }
 
         private void Die()
         {
             //Instancia particules d'explosió.
-            //dropData.Drop();
+
+            dropData.Drop(gameObject.transform.position);
+
             Destroy(gameObject, 0.1f);
         }
     } 

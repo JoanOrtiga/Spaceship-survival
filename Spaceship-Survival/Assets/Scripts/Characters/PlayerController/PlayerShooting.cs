@@ -31,11 +31,15 @@ namespace  SpaceShipSurvival
         
         private void Update()
         {
-            betweenBulletsTimer -= Time.deltaTime;
-
-            if (Input.GetMouseButton(0) && betweenBulletsTimer <= 0)
+            if (betweenBulletsTimer >= 0)
             {
-                if (bulletBox.childCount == numberOfUsingBullets)
+                betweenBulletsTimer -= Time.deltaTime;
+            }
+            
+
+            else if (Input.GetMouseButton(0))
+            {
+                if (bulletBox.childCount == numberOfUsingBullets-1)
                 {
                     SpawnBullet();
                 }
@@ -49,8 +53,6 @@ namespace  SpaceShipSurvival
                 numberOfUsingBullets++;
 
                 betweenBulletsTimer = timeBetweenBullets;
-
-                activeBullet.transform.SetAsFirstSibling();
             }
         }
 
