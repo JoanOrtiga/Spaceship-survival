@@ -11,7 +11,9 @@ namespace SpaceShipSurvival
 
         //[SerializeField] private float timeToDestroy;
         [SerializeField] private float bulletSpeed;
+        public int damange = 10;
 
+        public float timeToUnuse;
 
         private Rigidbody2D rb;
 
@@ -36,22 +38,22 @@ namespace SpaceShipSurvival
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log(other);
             
-            if (other.CompareTag("wall"))
+            if (other.CompareTag("Wall"))
             {
-                UnuseBullet();
+                Invoke("UnuseBullet", timeToUnuse);
             }
-            else if (other.CompareTag("Character"))
+            else if (other.CompareTag("Enemy"))
             {
-                UnuseBullet();
-                other.GetComponent<Character>().LoseHealth(50);
+                Invoke("UnuseBullet", timeToUnuse);
+                other.GetComponent<Character>().LoseHealth(damange);
             }
         }
 
         private void UnuseBullet()
         {
-            gameObject.SetActive(false); 
+            gameObject.SetActive(false);
+            gameObject.transform.SetAsLastSibling();
             playerShooting.numberOfUsingBullets--;
         }
     }

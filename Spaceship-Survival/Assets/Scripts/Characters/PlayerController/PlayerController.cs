@@ -12,6 +12,7 @@ namespace SpaceShipSurvival
 
         private float inputX;
         private float inputY;
+
         private void Awake()
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
