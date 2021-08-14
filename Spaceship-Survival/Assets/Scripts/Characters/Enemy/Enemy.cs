@@ -1,15 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
+
+
+public enum EnemyType
+{
+    KAMIKAZE = 0, ROUND, TRIANGULAR
+}
 
 namespace SpaceShipSurvival
 {
     public class Enemy : Character
     {
-        public enum EnemyType
-        {
-            SQUARED = 0, ROUND, TRIANGULAR
-        }
-
         public EnemyType enemyType = EnemyType.ROUND;
     }
 }
+
 

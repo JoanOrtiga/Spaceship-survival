@@ -11,6 +11,7 @@ namespace SpaceShipSurvival
         private bool gamePaused = false;
 
         private SpaceShipLogic logic;
+        
 
         public bool GetGamePaused()
         {

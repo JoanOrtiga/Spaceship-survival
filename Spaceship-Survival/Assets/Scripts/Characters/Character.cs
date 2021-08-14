@@ -14,8 +14,7 @@ namespace SpaceShipSurvival
         
         [SerializeField] private DropData dropData;
 
-        
-        protected void Awake()
+        protected virtual void Awake()
         {
             currentHealth = maxHealth;
         }
