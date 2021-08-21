@@ -7,15 +7,15 @@ namespace SpaceShipSurvival
 {
     public class PlayerController : Character
     {
-        private Rigidbody2D rigidbody2D;
+        private Rigidbody2D rb2d;
         [SerializeField] private float movementSpeed = 30.0f;
 
         private float inputX;
         private float inputY;
 
-        private void Awake()
+        protected override void Awake()
         {
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            rb2d = GetComponent<Rigidbody2D>();
         }
 
         private void Update()
@@ -26,7 +26,7 @@ namespace SpaceShipSurvival
 
         private void FixedUpdate()
         {
-            rigidbody2D.AddForce(new Vector2(inputX, inputY) * (Time.deltaTime * movementSpeed), ForceMode2D.Impulse);
+            rb2d.AddForce(new Vector2(inputX, inputY) * (Time.deltaTime * movementSpeed), ForceMode2D.Impulse);
         }
     }
 }
