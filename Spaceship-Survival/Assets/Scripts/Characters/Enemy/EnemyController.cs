@@ -5,7 +5,7 @@ namespace SpaceShipSurvival
 {
     public class EnemyController : Enemy
     {
-        protected override void Awake()
+        private void Awake()
         {
             base.Awake();
         }

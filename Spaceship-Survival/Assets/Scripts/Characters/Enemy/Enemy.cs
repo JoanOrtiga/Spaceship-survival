@@ -4,14 +4,14 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    NOT_DEFINED = 0, KAMIKAZE, SNIPER, CRAZY
+    KAMIKAZE = 0, ROUND, TRIANGULAR
 }
 
 namespace SpaceShipSurvival
 {
     public class Enemy : Character
     {
-        public EnemyType enemyType = EnemyType.SNIPER;
+        public EnemyType enemyType = EnemyType.ROUND;
     }
 }
 
