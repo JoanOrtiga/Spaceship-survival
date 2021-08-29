@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RoundsMaker;
 
 namespace SpaceShipSurvival
 {
@@ -31,9 +30,9 @@ namespace SpaceShipSurvival
 
         public void Init()
         {
-            roundsData = Resources.Load("RoundsData") as RoundsData;
+           /* roundsData = Resources.Load("RoundsData") as RoundsData;
             if(roundsData == null)
-                Debug.LogError("Rounds data couldn't be loaded");
+                Debug.LogError("Rounds data couldn't be loaded");*/
 
             player = FindObjectOfType<PlayerController>().GetComponent<Character>();
         }
