@@ -12,6 +12,9 @@ namespace SpaceShipSurvival
     {
         public List<Drop> drops = new List<Drop>();
         
+        //Fer min&max
+        public int coinsDrop;
+        
         public void Drop(Vector3 position)
         {
             GameObject drop = GetRandomDrop();

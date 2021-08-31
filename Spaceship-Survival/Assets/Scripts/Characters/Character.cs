@@ -28,7 +28,8 @@ namespace SpaceShipSurvival
 
             if (currentHealth <= 0)
             {
-                Die();
+                if(!gameObject.CompareTag("Player"))
+                    Die();
             }
         }
 

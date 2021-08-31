@@ -7,7 +7,7 @@ namespace SpaceShipSurvival
 {
     public class Bullet : MonoBehaviour
     {
-        private PlayerShooting playerShooting;
+        private Shooter shooter;
 
         //[SerializeField] private float timeToDestroy;
         [SerializeField] private float bulletSpeed;
@@ -17,21 +17,27 @@ namespace SpaceShipSurvival
 
         private Rigidbody2D rb;
 
+        private float timeToDestroy = 10f;
+
         private void Awake()
         {
-            playerShooting = FindObjectOfType<PlayerShooting>();
             rb = GetComponent<Rigidbody2D>();
+        }
+
+        public void SetShooter(Shooter Shooter)
+        {
+            shooter = Shooter;
         }
 
         private void Update()
         {
-            /*
+            
             timeToDestroy -= Time.deltaTime;
 
             
             if (timeToDestroy <= 0)
                 Destroy(gameObject);
-            */
+            
 
             rb.velocity =transform.up * (bulletSpeed * Time.deltaTime);
         }
@@ -54,7 +60,7 @@ namespace SpaceShipSurvival
         {
             gameObject.SetActive(false);
             gameObject.transform.SetAsLastSibling();
-            playerShooting.numberOfUsingBullets--;
+            shooter.ReduceUsingBullets();
         }
     }
 }

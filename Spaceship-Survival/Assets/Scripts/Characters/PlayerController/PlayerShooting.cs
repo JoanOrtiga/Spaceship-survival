@@ -6,7 +6,7 @@ using UnityEngine;
 namespace  SpaceShipSurvival
 {
 
-    public class PlayerShooting : MonoBehaviour
+    public class PlayerShooting : MonoBehaviour , Shooter
     {
         public GameObject bulletPrefab;
         public Transform bulletBox; //is where all the bullets will be kept
@@ -14,7 +14,7 @@ namespace  SpaceShipSurvival
         private GameObject activeBullet;
         private GameObject instantiatedBullet;
 
-        public int numberOfUsingBullets = 0;
+        private int numberOfUsingBullets = 0;
 
         public int initialBullets;
 
@@ -35,8 +35,6 @@ namespace  SpaceShipSurvival
             {
                 betweenBulletsTimer -= Time.deltaTime;
             }
-            
-
             else if (Input.GetMouseButton(0))
             {
                 if (bulletBox.childCount == numberOfUsingBullets-1)
@@ -48,6 +46,7 @@ namespace  SpaceShipSurvival
 
                 activeBullet.transform.position = transform.position;
                 activeBullet.transform.rotation = transform.rotation;
+                activeBullet.GetComponent<Bullet>().SetShooter(this);
                 activeBullet.SetActive(true);
 
                 numberOfUsingBullets++;
@@ -60,6 +59,11 @@ namespace  SpaceShipSurvival
         {
             instantiatedBullet = Instantiate(bulletPrefab, bulletBox);
             instantiatedBullet.SetActive(false);
+        }
+
+        public void ReduceUsingBullets()
+        {
+            numberOfUsingBullets--;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace RoundsMaker
         public float timeBetweenSpawns;
         public float timeToStartSpawning;
 
-        public SpawnEnemy(Vector3 spawnPoint, EnemyType enemyType = EnemyType.ROUND, int quantity = 0, float timeBetweenSpawns = 0.0f,
+        public SpawnEnemy(Vector3 spawnPoint, EnemyType enemyType = EnemyType.SNIPER, int quantity = 0, float timeBetweenSpawns = 0.0f,
             float timeToStartSpawning = 0.0f)
         {
             this.enemyType = enemyType;
