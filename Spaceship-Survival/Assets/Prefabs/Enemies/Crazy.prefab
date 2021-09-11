@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2749845733452677541
+--- !u!1 &3027269999772715079
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2749845733452677561}
-  - component: {fileID: 2749845733452677560}
-  - component: {fileID: 2749845733452677563}
-  - component: {fileID: 2749845733452677566}
-  - component: {fileID: 2749845733452677562}
-  - component: {fileID: 4946027056086613934}
-  - component: {fileID: 4209599402566845200}
+  - component: {fileID: 3027269999772715076}
+  - component: {fileID: 3027269999772715078}
+  - component: {fileID: 8569031255614914343}
+  - component: {fileID: 3014687752116838853}
+  - component: {fileID: 446884370277205245}
+  - component: {fileID: 390755433593896393}
+  - component: {fileID: 3027269999772715077}
   m_Layer: 0
-  m_Name: Sniper
+  m_Name: Crazy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2749845733452677561
+--- !u!4 &3027269999772715076
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
+  m_GameObject: {fileID: 3027269999772715079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.99, y: 18.72, z: -2.322374}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: -5.92, y: -0.3, z: -26.699392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2749845733452677560
+--- !u!212 &3027269999772715078
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
+  m_GameObject: {fileID: 3027269999772715079}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,24 +76,40 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: 8a1d7763115c9bc459a3fe1e1454b317, type: 3}
+  m_Color: {r: 0.665344, g: 1, b: 0.48584908, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2749845733452677563
+--- !u!58 &8569031255614914343
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027269999772715079}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &3014687752116838853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
+  m_GameObject: {fileID: 3027269999772715079}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
@@ -115,13 +131,13 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &2749845733452677566
+--- !u!114 &446884370277205245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
+  m_GameObject: {fileID: 3027269999772715079}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
@@ -129,13 +145,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!114 &2749845733452677562
+--- !u!114 &390755433593896393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
+  m_GameObject: {fileID: 3027269999772715079}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
@@ -165,39 +181,19 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!114 &4946027056086613934
+--- !u!114 &3027269999772715077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
+  m_GameObject: {fileID: 3027269999772715079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c22c8ba211be3e04b980046730a7db52, type: 3}
+  m_Script: {fileID: 11500000, guid: c319f2b838dee024a96246c7e291561b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 100
   dropData: {fileID: 11400000, guid: b900a457c8984f742a27a6b666411d2c, type: 2}
-  speed: 5
-  distanceToPlayer: 10
-  distanceToShoot: 15
-  bulletPrefab: {fileID: 5145733380707106751, guid: 7d921d2f477c5b7468dad0bed9e5b99e, type: 3}
-  initialBullets: 5
-  timeBetweenBullets: 0.3
---- !u!58 &4209599402566845200
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749845733452677541}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1
+  _mine: {fileID: 2561885064522714215, guid: 6875fbcfda53379429ee482cac742f7b, type: 3}
+  _delay: 1

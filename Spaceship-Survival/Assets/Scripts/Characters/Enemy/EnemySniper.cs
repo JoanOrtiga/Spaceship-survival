@@ -59,13 +59,12 @@ namespace SpaceShipSurvival
         private void Update()
         {
             CalculateClosePoint();
-
             Shoot();
         }
 
         private void Shoot()
         {
-           /* if ((player.position - transform.position).sqrMagnitude > distanceToShoot)
+            /*if ((player.position - transform.position).sqrMagnitude > distanceToShoot)
                 return;*/
             
             if (betweenBulletsTimer >= 0)
@@ -83,7 +82,7 @@ namespace SpaceShipSurvival
 
             activeBullet.transform.position = transform.position;
             activeBullet.transform.rotation =
-                Quaternion.LookRotation((transform.position - player.position).normalized, Vector3.forward);
+                Quaternion.LookRotation((transform.position - player.position).normalized, -Vector3.forward);
             activeBullet.GetComponent<Bullet>().SetShooter(this);
             activeBullet.SetActive(true);
 
