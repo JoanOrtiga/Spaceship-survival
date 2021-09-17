@@ -17,4 +17,7 @@ MonoBehaviour:
     drop: {fileID: 7606412715088261058, guid: 8d983fbb2c7cd0c4c8537bc08444621f, type: 3}
   - dropChance: 20
     drop: {fileID: 7606412715088261058, guid: d7282e83e00d2fb4284119161430009f, type: 3}
-  coinsDrop: 0
+  minCoinsDrop: 3
+  maxCoinsDrop: 10
+  coin: {fileID: 6418806850001721759, guid: 1ae8495befdcde4419c8c1c3df64149a, type: 3}
+  _coinRange: 3

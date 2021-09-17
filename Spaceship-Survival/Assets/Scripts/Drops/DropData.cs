@@ -11,16 +11,34 @@ namespace SpaceShipSurvival
     public class DropData : ScriptableObject
     {
         public List<Drop> drops = new List<Drop>();
-        
-        //Fer min&max
-        public int coinsDrop;
-        
+
+        //Coins
+        public int minCoinsDrop = 3;
+        public int maxCoinsDrop = 10;
+        public GameObject coin;
+        [SerializeField] float _coinRange = 3;
+        int randomCoins;
+        Vector2 coinPosition;
+
         public void Drop(Vector3 position)
         {
+            
             GameObject drop = GetRandomDrop();
 
             if (drop != null)
                 Instantiate(drop, position, Quaternion.identity);
+
+            //Coin
+            if (minCoinsDrop < maxCoinsDrop)
+            {
+                randomCoins = Convert.ToInt32(Random.Range(minCoinsDrop, maxCoinsDrop));
+                Debug.Log(randomCoins);
+                for (int i = 0; i < randomCoins; i++)
+                {
+                    coinPosition = Random.insideUnitCircle * _coinRange + (Vector2)position;
+                    Instantiate(coin, coinPosition, Quaternion.identity);
+                }
+            }
         }
 
         private GameObject GetRandomDrop()
@@ -70,6 +88,12 @@ namespace SpaceShipSurvival
 
             if (add > 100)
                 EditorGUILayout.HelpBox("Total chances > 100", MessageType.Error);
+
+
+            if (dropData.minCoinsDrop > dropData.maxCoinsDrop)
+            {
+                EditorGUILayout.HelpBox("Min Coins Drop > Max Coins Drop", MessageType.Error);
+            }
         }
     }
 }
