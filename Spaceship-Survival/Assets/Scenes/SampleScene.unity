@@ -530,7 +530,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.96
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1394,9 +1394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e7bfe3e97f3e14d897905efb54e758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 5145733380707106751, guid: 7d921d2f477c5b7468dad0bed9e5b99e, type: 3}
-  bulletBox: {fileID: 1345705289}
-  initialBullets: 5
+  gameObjectPoolerPrefab: {fileID: 7139281194016039696, guid: 96bdd0ad6bf067842ba00f3eb44ea1e8, type: 3}
   timeBetweenBullets: 0.4
 --- !u!61 &1967931037
 BoxCollider2D:
@@ -1625,5 +1623,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4946027056086613934, guid: d2619cd67e17f554c8ddc604b81184e4, type: 3}
+      propertyPath: gameObjectPoolerPrefab
+      value: 
+      objectReference: {fileID: 9382370587397223, guid: 3b0c5eb8db2923a4c8be5233904392cc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2619cd67e17f554c8ddc604b81184e4, type: 3}

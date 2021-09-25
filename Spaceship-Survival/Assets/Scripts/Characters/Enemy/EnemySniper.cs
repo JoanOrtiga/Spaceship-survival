@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SpaceShipSurvival
 {
-    public class EnemySniper : Character , Shooter
+    public class EnemySniper : Character
     {
         public float speed;
 
@@ -19,12 +19,8 @@ namespace SpaceShipSurvival
         private Transform target;
         
         [Header("Shooting")]
-        public GameObject bulletPrefab;
-        private Transform bulletBox; //is where all the bullets will be kept
+        public GameObjectPooler gameObjectPoolerPrefab;
         private GameObject activeBullet;
-        private GameObject instantiatedBullet;
-        private int numberOfUsingBullets = 0;
-        public int initialBullets;
         [SerializeField] public float timeBetweenBullets;
         private float betweenBulletsTimer;
 
@@ -40,20 +36,8 @@ namespace SpaceShipSurvival
 
             destinationSetter = GetComponent<AIDestinationSetter>();
             destinationSetter.target = target;
-            
-            
-            bulletBox = new GameObject().transform;
-            
-            for (int i = 0; i < initialBullets; i++)
-            {
-                SpawnBullet();
-            }
-        }
-        
-        private void SpawnBullet()
-        {
-            instantiatedBullet = Instantiate(bulletPrefab, bulletBox);
-            instantiatedBullet.SetActive(false);
+
+            gameObjectPoolerPrefab = Instantiate(gameObjectPoolerPrefab);
         }
 
         private void Update()
@@ -72,21 +56,15 @@ namespace SpaceShipSurvival
                 betweenBulletsTimer -= Time.deltaTime;
                 return;
             }
-            
-            if (bulletBox.childCount == numberOfUsingBullets-1)
-            {
-                SpawnBullet();
-            }
 
-            activeBullet = bulletBox.GetChild(numberOfUsingBullets).gameObject;
+            activeBullet = gameObjectPoolerPrefab.GetPooledObject();
+
+            activeBullet.GetComponent<PooledObject>().Restart();
 
             activeBullet.transform.position = transform.position;
             activeBullet.transform.rotation =
                 Quaternion.LookRotation((transform.position - player.position).normalized, -Vector3.forward);
-            activeBullet.GetComponent<Bullet>().SetShooter(this);
             activeBullet.SetActive(true);
-
-            numberOfUsingBullets++;
 
             betweenBulletsTimer = timeBetweenBullets;
         }
@@ -106,11 +84,6 @@ namespace SpaceShipSurvival
             Gizmos.DrawWireSphere(player.position, distanceToShoot);
             Gizmos.color = Color.white;
             Gizmos.DrawRay(player.position, (transform.position - player.position).normalized * distanceToPlayer);
-        }
-
-        public void ReduceUsingBullets()
-        {
-            numberOfUsingBullets--;
         }
     }
 }
