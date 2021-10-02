@@ -33,9 +33,7 @@ namespace SpaceShipSurvival
 
                     counter--;
                 }
-            
-                Debug.Log(pooledObject.activeSelf + " " + counter + " " + _pooledObjects.Count );
-
+                
                 if (!pooledObject.activeSelf)
                     return pooledObject;
             }
