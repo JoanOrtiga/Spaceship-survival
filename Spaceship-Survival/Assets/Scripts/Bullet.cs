@@ -5,41 +5,34 @@ using UnityEngine;
 
 namespace SpaceShipSurvival
 {
-    public class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour , PooledObject
     {
-        private Shooter shooter;
+        private Rigidbody2D _rb;
+        
+        [SerializeField] private float _bulletSpeed = 2500f;
+        [SerializeField] private int _damage = 10;
 
-        //[SerializeField] private float timeToDestroy;
-        [SerializeField] private float bulletSpeed;
-        public int damange = 10;
-
-        public float timeToUnuse;
-
-        private Rigidbody2D rb;
-
-        private float timeToDestroy = 10f;
+        [SerializeField] private float _timeToUnUse;
+        [SerializeField] private float _timeToDestroy = 10f;
+        private float _timerToDestroy;
+        public GameObjectPooler GameObjectPooler { get; set; }
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-        }
-
-        public void SetShooter(Shooter Shooter)
-        {
-            shooter = Shooter;
+            _rb = GetComponent<Rigidbody2D>();
+            Restart();
         }
 
         private void Update()
         {
-            
-            timeToDestroy -= Time.deltaTime;
+            _timerToDestroy -= Time.deltaTime;
 
             
-            if (timeToDestroy <= 0)
-                Destroy(gameObject);
+            if (_timerToDestroy <= 0)
+                DestroyObject();
             
 
-            rb.velocity =transform.up * (bulletSpeed * Time.deltaTime);
+            _rb.velocity =transform.up * (_bulletSpeed * Time.deltaTime);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -47,20 +40,29 @@ namespace SpaceShipSurvival
             
             if (other.CompareTag("Wall"))
             {
-                Invoke("UnuseBullet", timeToUnuse);
+                StartCoroutine(DestroyBullet());
             }
             else if (other.CompareTag("Enemy"))
             {
-                Invoke("UnuseBullet", timeToUnuse);
-                other.GetComponent<Character>().LoseHealth(damange);
+                StartCoroutine(DestroyBullet());
+                other.GetComponent<Character>().LoseHealth(_damage);
             }
         }
 
-        private void UnuseBullet()
+        IEnumerator DestroyBullet()
         {
-            gameObject.SetActive(false);
-            gameObject.transform.SetAsLastSibling();
-            shooter.ReduceUsingBullets();
+            yield return new WaitForSeconds(_timeToUnUse);
+            DestroyObject();
+        }
+
+        public void Restart()
+        {
+            _timerToDestroy = _timeToDestroy;
+        }
+
+        public void DestroyObject()
+        {
+            GameObjectPooler.ReturnToPool(gameObject);
         }
     }
 }

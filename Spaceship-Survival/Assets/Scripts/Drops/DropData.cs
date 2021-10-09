@@ -16,9 +16,9 @@ namespace SpaceShipSurvival
         public int minCoinsDrop = 3;
         public int maxCoinsDrop = 10;
         public GameObject coin;
-        [SerializeField] float _coinRange = 3;
-        int randomCoins;
-        Vector2 coinPosition;
+        [SerializeField] private float _coinRange = 3;
+        private int randomCoins;
+        private Vector2 coinPosition;
 
         public void Drop(Vector3 position)
         {
@@ -32,7 +32,6 @@ namespace SpaceShipSurvival
             if (minCoinsDrop < maxCoinsDrop)
             {
                 randomCoins = Convert.ToInt32(Random.Range(minCoinsDrop, maxCoinsDrop));
-                Debug.Log(randomCoins);
                 for (int i = 0; i < randomCoins; i++)
                 {
                     coinPosition = Random.insideUnitCircle * _coinRange + (Vector2)position;
@@ -60,17 +59,13 @@ namespace SpaceShipSurvival
         }
     }
 
-
-
     [System.Serializable]
     public class Drop
     {
         public float dropChance = 0;
         public GameObject drop;
     }
-
-
-
+    
     [CustomEditor(typeof(DropData))]
     public class CustomDropData : Editor
     {

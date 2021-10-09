@@ -7,26 +7,21 @@ namespace SpaceShipSurvival
 {
     public class PlayerController : Character
     {
-        private Rigidbody2D rigidbody2D;
-        [SerializeField] private float movementSpeed = 30.0f;
+        private PlayerMovement _playerMovement;
+        private PlayerShooting _playerShooting;
+        private PlayerStats _playerStats;
 
-        private float inputX;
-        private float inputY;
-
-        private void Awake()
+        protected override void Awake()
         {
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            base.Awake();
+
+            _playerStats = GetComponent<PlayerStats>();
+            _playerStats.UpdatePlayerHealth += UpdateMaxHealth;
         }
 
-        private void Update()
+        public void UpdateMaxHealth(int maxHealth)
         {
-            inputX = Input.GetAxis("Horizontal");
-            inputY = Input.GetAxis("Vertical");
-        }
-
-        private void FixedUpdate()
-        {
-            rigidbody2D.AddForce(new Vector2(inputX, inputY) * (Time.deltaTime * movementSpeed), ForceMode2D.Impulse);
+            base.maxHealth = maxHealth;
         }
     }
 }
