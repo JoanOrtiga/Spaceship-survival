@@ -14,10 +14,10 @@ TagManager:
   - Water
   - UI
   - Player
-  - PlayerBullets
+  - PlayerBullet
   - Walls
-  - 
-  - 
+  - EnemyBullet
+  - Enemy
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2873371303
     locked: 0

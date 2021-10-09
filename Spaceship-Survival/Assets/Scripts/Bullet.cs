@@ -37,12 +37,11 @@ namespace SpaceShipSurvival
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            
             if (other.CompareTag("Wall"))
             {
                 StartCoroutine(DestroyBullet());
             }
-            else if (other.CompareTag("Enemy"))
+            else if (other.CompareTag("Enemy") || other.CompareTag("Player"))
             {
                 StartCoroutine(DestroyBullet());
                 other.GetComponent<Character>().LoseHealth(_damage);

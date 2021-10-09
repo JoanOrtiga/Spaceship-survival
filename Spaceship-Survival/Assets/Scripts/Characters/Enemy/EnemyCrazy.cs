@@ -21,14 +21,20 @@ namespace SpaceShipSurvival
         private AIPath _aiPath;
 
         private Transform _player;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             _player = FindObjectOfType<PlayerController>().transform;
             _aiDestinationSetter = GetComponent<AIDestinationSetter>();
             _aiPath = GetComponent<AIPath>();
             _target = new GameObject().transform;
             
             _timer = GetRandomSpawnTime();
+        }
+
+        private void Start()
+        {
             CalculateWanderPoint();
         }
 
@@ -39,8 +45,10 @@ namespace SpaceShipSurvival
             if (_timer <= 0)
             {
                 _timer = GetRandomSpawnTime();
-                Instantiate(_mine.gameObject, transform.position, Quaternion.identity);
+                Instantiate(_mine.gameObject, transform.position, Quaternion.identity, SceneReferences.Instance.InstanciatedObjectsParent);
             }
+
+            
             
             if(_aiPath.reachedDestination)
                 CalculateWanderPoint();
@@ -51,9 +59,17 @@ namespace SpaceShipSurvival
             Vector2 position;
             position = UnityEngine.Random.insideUnitCircle * _distanceRange.y;
             position = (Vector2) _player.position + position;
-            
-            _target.position = position;
-            _aiDestinationSetter.target = _target;
+
+            Debug.Log(AstarPath.active);
+            if (AstarPath.active.GetNearest(position).node.Walkable)
+            {
+                _target.position = position;
+                _aiDestinationSetter.target = _target;
+            }
+            else
+            {
+                CalculateWanderPoint();
+            }
         }
 
         private float GetRandomSpawnTime()

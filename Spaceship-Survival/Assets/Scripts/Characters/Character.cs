@@ -8,7 +8,7 @@ namespace SpaceShipSurvival
     public class Character : MonoBehaviour
     {
         public int maxHealth = 100;
-        private int currentHealth;
+        private int _currentHealth;
 
         private bool damageable = true;
         
@@ -16,7 +16,12 @@ namespace SpaceShipSurvival
 
         protected virtual void Awake()
         {
-            currentHealth = maxHealth;
+            _currentHealth = maxHealth;
+        }
+
+        public int GetCurrentHealth()
+        {
+            return _currentHealth;
         }
 
         public void LoseHealth(int damage)
@@ -24,9 +29,9 @@ namespace SpaceShipSurvival
             if (damageable is false)
                 return;
 
-            currentHealth -= damage;
+            _currentHealth -= damage;
 
-            if (currentHealth <= 0)
+            if (_currentHealth <= 0)
             {
                 if(!gameObject.CompareTag("Player"))
                     Die();
@@ -35,14 +40,14 @@ namespace SpaceShipSurvival
 
         public void IncreaseHealth(int health)
         {
-            if (currentHealth + health < maxHealth) 
+            if (_currentHealth + health < maxHealth) 
             {
                 int x;
-                x = (currentHealth + health) - maxHealth;
+                x = (_currentHealth + health) - maxHealth;
                 health -= x;
             }
                 
-            currentHealth += health;
+            _currentHealth += health;
         }
 
         private void Die()

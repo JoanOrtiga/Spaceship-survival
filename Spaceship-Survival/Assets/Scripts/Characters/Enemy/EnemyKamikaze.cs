@@ -41,10 +41,9 @@ namespace SpaceShipSurvival
         {
             if (other.CompareTag("Player"))
             {
-                
                 other.GetComponent<Character>().LoseHealth(damage);
                 //Explosion particles
-                Destroy(gameObject, 0.05f);
+                Destroy(gameObject);
             }
         }
 

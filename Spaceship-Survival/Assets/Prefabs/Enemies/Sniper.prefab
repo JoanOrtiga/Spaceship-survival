@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2749845733452677562}
   - component: {fileID: 4946027056086613934}
   - component: {fileID: 4209599402566845200}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sniper
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,8 +182,7 @@ MonoBehaviour:
   speed: 5
   distanceToPlayer: 10
   distanceToShoot: 15
-  bulletPrefab: {fileID: 5145733380707106751, guid: 7d921d2f477c5b7468dad0bed9e5b99e, type: 3}
-  initialBullets: 5
+  gameObjectPoolerPrefab: {fileID: 9382370587397223, guid: 3b0c5eb8db2923a4c8be5233904392cc, type: 3}
   timeBetweenBullets: 0.3
 --- !u!58 &4209599402566845200
 CircleCollider2D:

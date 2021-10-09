@@ -48,8 +48,8 @@ namespace SpaceShipSurvival
 
         private void Shoot()
         {
-            /*if ((player.position - transform.position).sqrMagnitude > distanceToShoot)
-                return;*/
+            if ((player.position - transform.position).magnitude > distanceToShoot)
+                return;
             
             if (betweenBulletsTimer >= 0)
             {
