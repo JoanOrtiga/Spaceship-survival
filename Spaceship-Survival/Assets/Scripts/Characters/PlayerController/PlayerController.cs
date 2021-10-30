@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SpaceShipSurvival;
 using UnityEngine;
 
 namespace SpaceShipSurvival
@@ -10,6 +11,14 @@ namespace SpaceShipSurvival
         private PlayerMovement _playerMovement;
         private PlayerShooting _playerShooting;
         private PlayerStats _playerStats;
+
+        private event Action onPlayerDead;
+
+        public Action OnPlayerDead
+        {
+            get => onPlayerDead;
+            set => onPlayerDead = value;
+        }
 
         protected override void Awake()
         {
@@ -22,6 +31,11 @@ namespace SpaceShipSurvival
         public void UpdateMaxHealth(int maxHealth)
         {
             base.maxHealth = maxHealth;
+        }
+
+        private void OnDestroy()
+        {
+            OnPlayerDead.Invoke();
         }
     }
 }

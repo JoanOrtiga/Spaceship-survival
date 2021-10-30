@@ -20,6 +20,7 @@ namespace SpaceShipSurvival
         private void Update()
         {
             _healthBar.fillAmount = (float)_character.GetCurrentHealth() / (float)_character.maxHealth;
+            
         }
     }
 }
