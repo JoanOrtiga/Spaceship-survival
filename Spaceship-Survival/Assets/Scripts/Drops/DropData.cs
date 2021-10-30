@@ -20,6 +20,8 @@ namespace SpaceShipSurvival
         private int randomCoins;
         private Vector2 coinPosition;
 
+        private Transform coinController;
+
         public void Drop(Vector3 position)
         {
             
@@ -29,15 +31,14 @@ namespace SpaceShipSurvival
                 Instantiate(drop, position, Quaternion.identity);
 
             //Coin
-            if (minCoinsDrop < maxCoinsDrop)
+            
+            randomCoins = Convert.ToInt32(Random.Range(minCoinsDrop, maxCoinsDrop));
+            for (int i = 0; i < randomCoins; i++)
             {
-                randomCoins = Convert.ToInt32(Random.Range(minCoinsDrop, maxCoinsDrop));
-                for (int i = 0; i < randomCoins; i++)
-                {
-                    coinPosition = Random.insideUnitCircle * _coinRange + (Vector2)position;
-                    Instantiate(coin, coinPosition, Quaternion.identity);
-                }
+                coinPosition = Random.insideUnitCircle * _coinRange + (Vector2)position;
+                Instantiate(coin, coinPosition, Quaternion.identity);
             }
+
         }
 
         private GameObject GetRandomDrop()
@@ -86,9 +87,7 @@ namespace SpaceShipSurvival
 
 
             if (dropData.minCoinsDrop > dropData.maxCoinsDrop)
-            {
                 EditorGUILayout.HelpBox("Min Coins Drop > Max Coins Drop", MessageType.Error);
-            }
         }
     }
 }
