@@ -10,6 +10,7 @@ namespace SpaceShipSurvival
         [SerializeField] private float _maxShield = 0;
         [SerializeField] private float _speed = 30;
         [SerializeField] private int _coins = 0;
+        [SerializeField] private bool _autoCollection = false;
 
         public Action<int> UpdatePlayerHealth { get; set; }
         
@@ -34,6 +35,14 @@ namespace SpaceShipSurvival
             
         }
 
+        public void AutoCollectCoins()
+        {
+            if (WasteCoins(1))
+            {
+                _autoCollection = true;
+            }
+        }
+
         public bool WasteCoins(int coins)
         {
             if (_coins - coins < 0)
@@ -45,6 +54,11 @@ namespace SpaceShipSurvival
                 _coins -= coins;
                 return true;
             }
+        }
+
+        public void TotalCoins(int totalcoins)
+        {
+            _coins = totalcoins;
         }
     }
 }
