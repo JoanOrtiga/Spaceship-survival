@@ -13,14 +13,14 @@ namespace SpaceShipSurvival
         public float distanceToPlayer;
         public float distanceToShoot;
 
-        private Transform player;
-        private AIPath aiPath;
-        private AIDestinationSetter destinationSetter;
-        private Transform target;
+        private Transform _player;
+        private AIPath _aiPath;
+        private AIDestinationSetter _destinationSetter;
+        private Transform _target;
         
         [Header("Shooting")]
         public GameObjectPooler gameObjectPoolerPrefab;
-        private GameObject activeBullet;
+        private GameObject _activeBullet;
         [SerializeField] public float timeBetweenBullets;
         private float betweenBulletsTimer;
 
@@ -28,16 +28,17 @@ namespace SpaceShipSurvival
         protected override void Awake()
         {
             base.Awake();
-            aiPath = GetComponent<AIPath>();
-            aiPath.maxSpeed = speed;
-            player = SpaceShipLogic.GetLogic().player.transform;
+            _aiPath = GetComponent<AIPath>();
+            _aiPath.maxSpeed = speed;
+            _player = SpaceShipLogic.GetLogic().player.transform;
 
-            target = new GameObject().transform;
+            _target = new GameObject().transform;
+            _target.parent = SceneReferences.Instance.InstanciatedObjectsParent;
 
-            destinationSetter = GetComponent<AIDestinationSetter>();
-            destinationSetter.target = target;
+            _destinationSetter = GetComponent<AIDestinationSetter>();
+            _destinationSetter.target = _target;
 
-            gameObjectPoolerPrefab = Instantiate(gameObjectPoolerPrefab);
+            gameObjectPoolerPrefab = Instantiate(gameObjectPoolerPrefab, SceneReferences.Instance.InstanciatedObjectsParent);
         }
 
         private void Update()
@@ -48,7 +49,7 @@ namespace SpaceShipSurvival
 
         private void Shoot()
         {
-            if ((player.position - transform.position).magnitude > distanceToShoot)
+            if ((_player.position - transform.position).magnitude > distanceToShoot)
                 return;
             
             if (betweenBulletsTimer >= 0)
@@ -57,33 +58,33 @@ namespace SpaceShipSurvival
                 return;
             }
 
-            activeBullet = gameObjectPoolerPrefab.GetPooledObject();
+            _activeBullet = gameObjectPoolerPrefab.GetPooledObject();
 
-            activeBullet.GetComponent<PooledObject>().Restart();
+            _activeBullet.GetComponent<PooledObject>().Restart();
 
-            activeBullet.transform.position = transform.position;
-            activeBullet.transform.rotation =
-                Quaternion.LookRotation((transform.position - player.position).normalized, -Vector3.forward);
-            activeBullet.SetActive(true);
+            _activeBullet.transform.position = transform.position;
+            _activeBullet.transform.rotation =
+                Quaternion.LookRotation((transform.position - _player.position).normalized, -Vector3.forward);
+            _activeBullet.SetActive(true);
 
             betweenBulletsTimer = timeBetweenBullets;
         }
         private void CalculateClosePoint()
         {
-            target.position = player.position + (transform.position - player.position).normalized * distanceToPlayer;
+            _target.position = _player.position + (transform.position - _player.position).normalized * distanceToPlayer;
         }
 
         private void OnDrawGizmosSelected()
         {
-            if (player == null)
+            if (_player == null)
             {
-                player = FindObjectOfType<PlayerController>().transform;
+                _player = FindObjectOfType<PlayerController>().transform;
             }
             
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(player.position, distanceToShoot);
+            Gizmos.DrawWireSphere(_player.position, distanceToShoot);
             Gizmos.color = Color.white;
-            Gizmos.DrawRay(player.position, (transform.position - player.position).normalized * distanceToPlayer);
+            Gizmos.DrawRay(_player.position, (transform.position - _player.position).normalized * distanceToPlayer);
         }
     }
 }

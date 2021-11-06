@@ -8,35 +8,65 @@ namespace  SpaceShipSurvival
 
     public class PlayerShooting : MonoBehaviour
     {
-        [SerializeField] private GameObjectPooler gameObjectPoolerPrefab;
+        [SerializeField] private GameObjectPooler _gameObjectPoolerPrefab;
         
-        private GameObject activeBullet;
+        private GameObject _activeBullet;
         
-        [SerializeField] public float timeBetweenBullets;
-        private float betweenBulletsTimer;
+        [SerializeField] private float _timeBetweenBullets;
+        private float _betweenBulletsTimer;
 
+        [Header("Reloading")]
+        [SerializeField] private float _reloadTime;
+        [SerializeField] private int _magazineCapacity = 30;
+        private int _currentMagazine;
+
+        private bool _reloading = false;
+        [SerializeField] private KeyCode _reloadButton = KeyCode.R;
+        
         private void Awake()
         {
-            gameObjectPoolerPrefab = Instantiate(gameObjectPoolerPrefab);
+            _gameObjectPoolerPrefab = Instantiate(_gameObjectPoolerPrefab, SceneReferences.Instance.InstanciatedObjectsParent);
+            _currentMagazine = _magazineCapacity;
         }
 
         private void Update()
         {
-            if (betweenBulletsTimer >= 0)
+            if (Input.GetKeyDown(_reloadButton))
             {
-                betweenBulletsTimer -= Time.deltaTime;
+                StartCoroutine(Reloading());
             }
-            else if (Input.GetMouseButton(0))
+            
+            if (_betweenBulletsTimer >= 0)
             {
-                activeBullet = gameObjectPoolerPrefab.GetPooledObject();
+                _betweenBulletsTimer -= Time.deltaTime;
+            }
+            else if (Input.GetMouseButton(0) && !_reloading)
+            {
+                _activeBullet = _gameObjectPoolerPrefab.GetPooledObject();
                 
-                activeBullet.GetComponent<PooledObject>().Restart();
-                activeBullet.transform.position = transform.position;
-                activeBullet.transform.rotation = transform.rotation;
-                activeBullet.SetActive(true);
+                _activeBullet.GetComponent<PooledObject>().Restart();
+                _activeBullet.transform.position = transform.position;
+                _activeBullet.transform.rotation = transform.rotation;
+                _activeBullet.SetActive(true);
 
-                betweenBulletsTimer = timeBetweenBullets;
+                _betweenBulletsTimer = _timeBetweenBullets;
+                _currentMagazine--;
+
+                if (_currentMagazine <= 0)
+                {
+                    StartCoroutine(Reloading());
+                }
             }
+        }
+
+        IEnumerator Reloading()
+        {
+            _reloading = true;
+
+            yield return new WaitForSeconds(_reloadTime);
+
+            _currentMagazine = _magazineCapacity;
+            _reloading = false;
         }
     }
 }

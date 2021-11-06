@@ -9,9 +9,9 @@ namespace SpaceShipSurvival
     {
         [SerializeField] private Transform target;
 
-        private void Awake()
+        private void Start()
         {
-            transform.parent = null;
+            transform.parent = SceneReferences.Instance.InstanciatedObjectsParent;
         }
 
         private void Update()

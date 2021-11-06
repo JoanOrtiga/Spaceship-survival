@@ -29,6 +29,7 @@ namespace SpaceShipSurvival
             _aiDestinationSetter = GetComponent<AIDestinationSetter>();
             _aiPath = GetComponent<AIPath>();
             _target = new GameObject().transform;
+            _target.parent = SceneReferences.Instance.InstanciatedObjectsParent;
             
             _timer = GetRandomSpawnTime();
         }
@@ -47,8 +48,6 @@ namespace SpaceShipSurvival
                 _timer = GetRandomSpawnTime();
                 Instantiate(_mine.gameObject, transform.position, Quaternion.identity, SceneReferences.Instance.InstanciatedObjectsParent);
             }
-
-            
             
             if(_aiPath.reachedDestination)
                 CalculateWanderPoint();
@@ -60,7 +59,6 @@ namespace SpaceShipSurvival
             position = UnityEngine.Random.insideUnitCircle * _distanceRange.y;
             position = (Vector2) _player.position + position;
 
-            Debug.Log(AstarPath.active);
             if (AstarPath.active.GetNearest(position).node.Walkable)
             {
                 _target.position = position;

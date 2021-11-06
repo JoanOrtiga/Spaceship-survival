@@ -12,15 +12,14 @@ namespace SpaceShipSurvival
 
         private void Start()
         {
-            coinCotroller = GameObject.Find("Coin_Controller").transform;
-            transform.parent = coinCotroller;
+            transform.parent = SceneReferences.Instance.InstanciatedObjectsParent;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player") && triggerCalled==false)
             {
-                GetComponentInParent<CoinController>().Coin(valueCoin);
+                PlayerStats.Instance.AddCoins(valueCoin);
                 triggerCalled = true;
                 Destroy(gameObject, 0.2f);
             }

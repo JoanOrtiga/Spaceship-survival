@@ -5,6 +5,40 @@ namespace SpaceShipSurvival
 {
     public class PlayerStats : MonoBehaviour
     {
+        private static PlayerStats _instance;
+
+        public static PlayerStats Instance
+        {
+            get
+            {
+                if (_instance is null)
+                {
+                    PlayerStats stats = FindObjectOfType<PlayerStats>();
+                    
+                    if (stats != null)
+                    {
+                        _instance = stats;
+                        return _instance;
+                    }
+                    
+                    GameObject playerStats = new GameObject();
+                    PlayerStats._instance = playerStats.AddComponent<PlayerStats>();
+                }
+
+                return _instance;
+            }
+            private set
+            {
+                if (_instance != null)
+                {
+                    Destroy(value);
+                    return;
+                }
+
+                _instance = value;
+            }
+        }
+        
         [SerializeField] private float _damage = 10;
         [SerializeField] private float _maxHealth = 100;
         [SerializeField] private float _maxShield = 0;
@@ -13,7 +47,20 @@ namespace SpaceShipSurvival
         [SerializeField] private bool _autoCollection = false;
 
         public Action<int> UpdatePlayerHealth { get; set; }
-        
+
+        private event Action<int> _onCoinUpdate;
+
+        public event Action<int> OnUpdateCoin
+        {
+            add => _onCoinUpdate += value;
+            remove => _onCoinUpdate -= value;
+        }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         public void IncreaseDamage()
         {
             _damage += 5;
@@ -22,17 +69,14 @@ namespace SpaceShipSurvival
 
         public void IncreaseMaxHealth()
         {
-            
         }
 
         public void InreaseMaxShield()
         {
-            
         }
 
         public void IncreaseSpeed()
         {
-            
         }
 
         public void AutoCollectCoins()
@@ -49,16 +93,16 @@ namespace SpaceShipSurvival
             {
                 return false;
             }
-            else
-            {
-                _coins -= coins;
-                return true;
-            }
+
+            _coins -= coins;
+            _onCoinUpdate?.Invoke(_coins);
+            return true;
         }
 
-        public void TotalCoins(int totalcoins)
+        public void AddCoins(int coinsToAdd)
         {
-            _coins = totalcoins;
+            _coins += coinsToAdd;
+            _onCoinUpdate?.Invoke(_coins);
         }
     }
 }

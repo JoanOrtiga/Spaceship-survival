@@ -12,6 +12,8 @@ namespace SpaceShipSurvival
 
         private Character _character;
 
+        public GameObject ItemToDestroy;
+
         private void Awake()
         {
             _character = GetComponent<Character>();
@@ -20,7 +22,11 @@ namespace SpaceShipSurvival
         private void Update()
         {
             _healthBar.fillAmount = (float)_character.GetCurrentHealth() / (float)_character.maxHealth;
-            
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(ItemToDestroy);
         }
     }
 }
