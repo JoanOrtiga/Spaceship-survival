@@ -38,8 +38,18 @@ namespace SpaceShipSurvival
                 _instance = value;
             }
         }
+
         
-        [SerializeField] private float _damage = 10;
+        [SerializeField] private Damage damage;
+        [SerializeField] private int _damageLevel = 0;
+        public void IncreaseDamage()
+        {
+            _damageLevel++;
+        }
+        public float GetDamage => damage.values[_damageLevel].increaseValue;
+        
+        
+        
         [SerializeField] private float _maxHealth = 100;
         [SerializeField] private float _maxShield = 0;
         [SerializeField] private float _speed = 30;
@@ -56,17 +66,12 @@ namespace SpaceShipSurvival
             remove => _onCoinUpdate -= value;
         }
 
-        private void Awake()
-        {
-            Instance = this;
-        }
-
-        public void IncreaseDamage()
-        {
-            _damage += 5;
-            UpdatePlayerHealth.Invoke(Mathf.RoundToInt(_damage));
-        }
-
+        /*      public void IncreaseDamage(int value)
+              {
+                  _damage = value;
+              //    UpdatePlayerHealth.Invoke(Mathf.RoundToInt(_damage));
+              }
+      */
         public void IncreaseMaxHealth()
         {
         }
