@@ -25,16 +25,17 @@ namespace SpaceShipSurvival
             base.Awake();
 
             _playerStats = GetComponent<PlayerStats>();
-            _playerStats.UpdatePlayerHealth += UpdateMaxHealth;
+            _playerStats.OnMaxHealthChanged += UpdateMaxHealth;
         }
 
-        public void UpdateMaxHealth(int maxHealth)
+        public void UpdateMaxHealth(float maxHealth)
         {
-            base.maxHealth = maxHealth;
+            base.maxHealth = int.Parse(maxHealth.ToString());
         }
 
         private void OnDestroy()
         {
+            _playerStats.OnMaxHealthChanged -= UpdateMaxHealth;
             OnPlayerDead.Invoke();
         }
     }

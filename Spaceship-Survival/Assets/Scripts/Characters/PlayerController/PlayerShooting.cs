@@ -6,7 +6,7 @@ using UnityEngine;
 namespace  SpaceShipSurvival
 {
 
-    public class PlayerShooting : MonoBehaviour
+    public class PlayerShooting : MonoBehaviour , PauseableObject
     {
         [SerializeField] private GameObjectPooler _gameObjectPoolerPrefab;
         
@@ -27,6 +27,8 @@ namespace  SpaceShipSurvival
         {
             _gameObjectPoolerPrefab = Instantiate(_gameObjectPoolerPrefab, SceneReferences.Instance.InstanciatedObjectsParent);
             _currentMagazine = _magazineCapacity;
+
+            GameController.Instance.OnGamePaused += Pause;
         }
 
         private void Update()
@@ -67,6 +69,16 @@ namespace  SpaceShipSurvival
 
             _currentMagazine = _magazineCapacity;
             _reloading = false;
+        }
+
+        private void OnDestroy()
+        {
+            GameController.Instance.OnGamePaused -= Pause;
+        }
+
+        public void Pause(bool paused)
+        {
+            this.enabled = !paused;
         }
     }
 }

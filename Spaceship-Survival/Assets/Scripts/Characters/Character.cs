@@ -58,8 +58,6 @@ namespace SpaceShipSurvival
 
             Destroy(gameObject, 0.1f);
         }
-        
-        
     } 
 }
 

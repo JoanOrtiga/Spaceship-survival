@@ -22,5 +22,3 @@ MonoBehaviour:
     price: 1000
   - increaseValue: 40
     price: 3000
-  - increaseValue: 0
-    price: 0

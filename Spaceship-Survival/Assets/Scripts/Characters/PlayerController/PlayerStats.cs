@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceShipSurvival
@@ -42,21 +43,51 @@ namespace SpaceShipSurvival
         
         [SerializeField] private Damage damage;
         [SerializeField] private int _damageLevel = 0;
+        public event Action<float> DamageChanged;
         public void IncreaseDamage()
         {
             _damageLevel++;
+            DamageChanged?.Invoke(GetDamage);
         }
         public float GetDamage => damage.values[_damageLevel].increaseValue;
+
+        [SerializeField] private Health health;
+        [SerializeField] private int _healthLevel = 0;
+        public event Action<float> OnMaxHealthChanged;
+        public void IncreaseMaxHealth()
+        {
+            _healthLevel++;
+            OnMaxHealthChanged?.Invoke(GetHealth);
+        }
+        public float GetHealth
+        {
+            get
+            {
+                if (health != null)
+                {
+                    if (health.values != null || health.values.Length != 0)
+                    {
+                        return health.values[_healthLevel].increaseValue;
+                    }
+                }
+
+                return 100;
+            }
+        }
+
+        [SerializeField] private Shield shield;
+        [SerializeField] private int _shieldLevel = 0;
+        public void IncreaseMaxShield()
+        {
+            _shieldLevel++;
+        }
+        public float GetShield => shield.values[_shieldLevel].increaseValue;
         
         
-        
-        [SerializeField] private float _maxHealth = 100;
         [SerializeField] private float _maxShield = 0;
         [SerializeField] private float _speed = 30;
         [SerializeField] private int _coins = 0;
         [SerializeField] private bool _autoCollection = false;
-
-        public Action<int> UpdatePlayerHealth { get; set; }
 
         private event Action<int> _onCoinUpdate;
 
@@ -65,25 +96,7 @@ namespace SpaceShipSurvival
             add => _onCoinUpdate += value;
             remove => _onCoinUpdate -= value;
         }
-
-        /*      public void IncreaseDamage(int value)
-              {
-                  _damage = value;
-              //    UpdatePlayerHealth.Invoke(Mathf.RoundToInt(_damage));
-              }
-      */
-        public void IncreaseMaxHealth()
-        {
-        }
-
-        public void InreaseMaxShield()
-        {
-        }
-
-        public void IncreaseSpeed()
-        {
-        }
-
+        
         public void AutoCollectCoins()
         {
             if (WasteCoins(1))

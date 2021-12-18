@@ -37,14 +37,14 @@ namespace SpaceShipSurvival
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            if (other.CompareTag("Player"))
+            if (col.gameObject.CompareTag("Player"))
             {
-                other.GetComponent<Character>().LoseHealth(damage);
+                col.gameObject.GetComponent<Character>().LoseHealth(damage);
                 //Explosion particles
                 Destroy(gameObject);
-            }
+            } 
         }
 
         private void OnDrawGizmosSelected()
